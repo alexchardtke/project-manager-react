@@ -41,12 +41,13 @@ class Forecast extends Component {
     return (
       <div className="Forecast">
         <h3 className="forecast-header">Forecast</h3>
-        <form className="search-container" onSubmit={this.handleSubmit.bind(this)}>
-          <label>Enter location:</label>
-          <input id="search-input" type="text" ref="location"/>
-          <input type="submit" value="Submit" />
+        <form className="form-inline" onSubmit={this.handleSubmit.bind(this)}>
+          <div className="form-group">
+            <label forhtml="search-input">Enter location:</label>
+            <input id="search-input" className="form-control" type="text" ref="location"/>
+          </div>
+          <input id="submit-button" type="submit" className="btn btn-default" value="Submit" />
         </form>
-        <br />
         <div className="current-conditions-container">
           <h3>Current Conditions</h3>
           <p>{this.props.conditions.weather}</p>
