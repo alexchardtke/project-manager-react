@@ -8,7 +8,7 @@ import Forecast from './components/forecast';
 import forecastData from './data';
 import './App.css';
 
-const API_KEY = 'a8kIAbbdAbZuAeGes7BGg7UDgTmTdty1';
+const API_KEY = 'b27c7b2b62069587';
 
 class App extends Component {
   constructor() {
@@ -59,32 +59,31 @@ class App extends Component {
 
   getLocation(location) {
     console.log(location);
-    $.ajax({
-      url: `http://dataservice.accuweather.com/locations/v1/cities/search?q=${location}&apikey=${API_KEY}`,
-      dataType: 'json',
-      cache: false,
-      success: function(data) {
-        this.setState({ location: data[0] }, function() {
-          // console.log(this.state.location.Key);
-          const key = this.state.location.Key;
-          this.getAccuweather(key);
-        });
-      }.bind(this),
-      error: function(xhr, status, err) {
-        console.log(err);
-      }
-    });
+    if(typeof location !== 'string') throw 'Location is not a string.';
+
+    location = location.trim();
+
+    var formattedLocation = {};
+
+    var comma = location.indexOf(',');
+
+    formattedLocation.city = location.slice(0, comma);
+    formattedLocation.city = formattedLocation.city.replace(' ', '_');
+
+    formattedLocation.state = location.substr(comma + 2);
+    console.log(formattedLocation);
+    this.getConditions(formattedLocation);
   }
 
-  getAccuweather(key) {
+  getConditions(location) {
     // console.log(this.state);
     $.ajax({
-      url: `http://dataservice.accuweather.com/currentconditions/v1/${key}?apikey=${API_KEY}`,
+      url: `http://api.wunderground.com/api/${API_KEY}/conditions/q/${location.state}/${location.city}.json`,
       dataType: 'json',
       cache: false,
       success: function(data) {
-        this.setState({ conditions: data[0] }, function() {
-          console.log(this.state);
+        this.setState({ conditions: data.current_observation }, function() {
+          console.log(data.current_observation);
         });
       }.bind(this),
       error: function(xhr, status, err) {

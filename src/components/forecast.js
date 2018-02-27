@@ -49,8 +49,8 @@ class Forecast extends Component {
         <br />
         <div className="current-conditions-container">
           <h3>Current Conditions</h3>
-          <p>{this.props.conditions.WeatherText}</p>
-          <p></p>
+          <p>{this.props.conditions.weather}</p>
+          <p>{this.props.conditions.temperature_string}</p>
         </div>
         <div className="forecast-container">
           <h3>90-Day Forecast</h3>
