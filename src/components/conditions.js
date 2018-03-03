@@ -6,17 +6,17 @@ class Conditions extends Component {
   render() {
     console.log('Conditions props = ', this.props);
     const weather = this.props.conditions.weather;
-    const temperature = this.props.conditions.temperature_string;
-    const dewpoint = this.props.conditions.dewpoint_string;
-    const feelsLike = this.props.conditions.feelslike_string;
+    const temperature = this.props.conditions.temp_f;
+    const dewpoint = this.props.conditions.dewpoint_f;
+    const feelsLike = this.props.conditions.feelslike_f;
 
     return (
-      <div className="Conditions">
+      <div className="Conditions container container-fluid">
         <h3>Current Conditions</h3>
         <p><strong>Current</strong>: {weather}</p>
-        <p><strong>Temperature</strong>: {temperature}</p>
-        <p><strong>Dew Point</strong>: {dewpoint}</p>
-        <p><strong>Feels Like</strong>: {feelsLike}</p>
+        <p><strong>Temperature</strong>: {temperature}°F</p>
+        <p><strong>Dew Point</strong>: {dewpoint}°F</p>
+        <p><strong>Feels Like</strong>: {feelsLike}°F</p>
       </div>
     );
   }

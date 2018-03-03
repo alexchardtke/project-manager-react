@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import uuid from 'uuid';
 import $ from 'jquery';
 import Search from './components/search';
 import Conditions from './components/conditions';

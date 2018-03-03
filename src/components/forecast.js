@@ -17,7 +17,7 @@ class Forecast extends Component {
     }
 
     return (
-      <div className="Forecast">
+      <div className="Forecast container container-fluid">
         <h3>90-Day Forecast</h3>
         {forecastItems}
       </div>

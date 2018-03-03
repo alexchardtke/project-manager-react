@@ -29,14 +29,14 @@ class Search extends Component {
     // console.log('Search props = ', this.props);
 
     return (
-      <div className="Search">
+      <div className="Search container container-fluid">
         <h3 className="forecast-header">Forecast</h3>
         <form className="form-inline" onSubmit={this.handleSubmit.bind(this)}>
           <div className="form-group">
             <label forhtml="search-input">Enter location:</label>
             <input id="search-input" className="form-control" type="text" ref="location"/>
           </div>
-          <input id="submit-button" type="submit" className="btn btn-default" value="Submit" />
+          <button id="submit-button" type="submit" className="btn btn-default">Submit</button>
         </form>
       </div>
     );
