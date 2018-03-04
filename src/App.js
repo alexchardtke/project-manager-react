@@ -12,7 +12,6 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      projects: [],
       conditions: []
     }
   }
@@ -31,7 +30,6 @@ class App extends Component {
     formattedLocation.city = formattedLocation.city.replace(' ', '_');
 
     formattedLocation.state = location.substr(comma + 2);
-    console.log(formattedLocation);
     this.getConditions(formattedLocation);
   }
 
@@ -43,8 +41,6 @@ class App extends Component {
       cache: false,
       success: function(data) {
         this.setState({ conditions: data.current_observation }, function() {
-          console.log(data.current_observation);
-          console.log(typeof this.state.conditions);
         });
       }.bind(this),
       error: function(xhr, status, err) {
