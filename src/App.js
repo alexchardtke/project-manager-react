@@ -19,7 +19,7 @@ class App extends Component {
 
   getLocation(location) {
     console.log(location);
-    if(typeof location !== 'string') throw 'Location is not a string.';
+    if(typeof location !== 'string') throw new Error('Location is not a string.');
 
     location = location.trim();
 
