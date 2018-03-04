@@ -6,9 +6,20 @@ class ForecastItem extends Component {
   render() {
     // console.log(this.props);
     return (
-      <li className="ForecastItem">
-        <strong>{this.props.forecast.date}</strong>: Hi: {this.props.forecast.high}, Low: {this.props.forecast.low}
-      </li>
+      <div>
+        <div className="row">
+          <li className="ForecastItem col-xs-4">
+            <strong>{this.props.forecast.date}</strong>
+          </li>
+          <li className="ForecastItem col-xs-4">
+            Hi: {this.props.forecast.high}
+          </li>
+          <li className="ForecastItem col-xs-4">
+            Low: {this.props.forecast.low}
+          </li>
+        </div>
+        <hr />
+      </div>
     );
   }
 }

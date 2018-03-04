@@ -9,14 +9,18 @@ class Conditions extends Component {
     const temperature = this.props.conditions.temp_f;
     const dewpoint = this.props.conditions.dewpoint_f;
     const feelsLike = this.props.conditions.feelslike_f;
+    const location = Object(this.props.conditions.display_location);
+    console.log(location.full);
 
     return (
       <div className="Conditions container container-fluid">
         <h3>Current Conditions</h3>
-        <p><strong>Current</strong>: {weather}</p>
-        <p><strong>Temperature</strong>: {temperature}°F</p>
+        <h4 className="lead">{location.full}</h4>
+        <p className="temperature">{temperature}°F</p>
+        <p className="weather">{weather}</p>
         <p><strong>Dew Point</strong>: {dewpoint}°F</p>
         <p><strong>Feels Like</strong>: {feelsLike}°F</p>
+        <hr />
       </div>
     );
   }

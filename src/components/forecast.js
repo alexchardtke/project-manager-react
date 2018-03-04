@@ -19,7 +19,9 @@ class Forecast extends Component {
     return (
       <div className="Forecast container container-fluid">
         <h3>90-Day Forecast</h3>
-        {forecastItems}
+        <ul className="list-unstyled">
+          {forecastItems}
+        </ul>
       </div>
     );
   }

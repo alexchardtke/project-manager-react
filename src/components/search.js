@@ -30,7 +30,7 @@ class Search extends Component {
 
     return (
       <div className="Search container container-fluid">
-        <h3 className="forecast-header">Forecast</h3>
+        <h3 className="forecast-header">Search</h3>
         <form className="form-inline" onSubmit={this.handleSubmit.bind(this)}>
           <div className="form-group">
             <label forhtml="search-input">Enter location:</label>
@@ -38,6 +38,7 @@ class Search extends Component {
           </div>
           <button id="submit-button" type="submit" className="btn btn-default">Submit</button>
         </form>
+        <hr />
       </div>
     );
   }
