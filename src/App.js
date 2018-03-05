@@ -4,6 +4,7 @@ import Search from './components/search';
 import Conditions from './components/conditions';
 import Forecast from './components/forecast';
 import forecastData from './data';
+import scrapeForecast from './ninety-day';
 import './App.css';
 
 const API_KEY = 'b27c7b2b62069587';
@@ -19,6 +20,7 @@ class App extends Component {
   getLocation(location) {
     console.log(location);
     if(typeof location !== 'string') throw new Error('Location is not a string.');
+    scrapeForecast();
 
     location = location.trim();
 
