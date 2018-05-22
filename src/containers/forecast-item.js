@@ -9,7 +9,7 @@ class ForecastItem extends Component {
     }
     const data = this.props.forecast;
 
-    console.log('Forecast item: ', data);
+    // console.log('Forecast item: ', data);
     const high = data.high.fahrenheit;
     const low = data.low.fahrenheit;
     const weekday = data.date.weekday;

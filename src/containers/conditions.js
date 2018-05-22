@@ -8,18 +8,18 @@ class Conditions extends Component {
     if (!this.props.conditions) {
       return null;
     }
-    const data = this.props.conditions[0];
+    const data = this.props.conditions.current_observation;
 
-    console.log(data);
-    const location = data.current_observation.display_location.full;
-    const weather = data.current_observation.weather;
-    const icon = data.current_observation.icon_url;
-    const iconAlt = data.current_observation.icon;
-    const temperature = data.current_observation.temp_f;
-    const dewpoint = data.current_observation.dewpoint_f;
-    const feelsLike = data.current_observation.feelslike_f;
-    const wind = data.current_observation.wind_mph;
-    const windDirection = data.current_observation.wind_dir;
+    console.log('Current Observation: ', data);
+    const location = data.display_location.full;
+    const weather = data.weather;
+    const icon = data.icon_url;
+    const iconAlt = data.icon;
+    const temperature = data.temp_f;
+    const dewpoint = data.dewpoint_f;
+    const feelsLike = data.feelslike_f;
+    const wind = data.wind_mph;
+    const windDirection = data.wind_dir;
 
     return (
       <div className="conditions-container container container-fluid">
@@ -45,7 +45,7 @@ Conditions.propTypes = {
 }
 
 function mapStateToProps(state) {
-  return { conditions: state.conditions };
+  return { conditions: state.weather.conditions };
 }
 
 export default connect(mapStateToProps)(Conditions);

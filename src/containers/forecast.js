@@ -9,12 +9,12 @@ class Forecast extends Component {
     if (!this.props.forecast) {
       return null;
     }
-    const data = this.props.forecast[0];
 
-    console.log('Forecast props = ', data);
+    const data = this.props.forecast.forecast.simpleforecast.forecastday;
+    console.log('Forecast: ', data);
 
-    const forecastItems = data.forecast.simpleforecast.forecastday.map(day => {
-      console.log(day);
+    const forecastItems = data.map(day => {
+      // console.log(day);
         return (
           <ForecastItem key={day.date.day} forecast={day}/>
         );
@@ -44,7 +44,7 @@ class Forecast extends Component {
 }
 
 function mapStateToProps(state) {
-  return { forecast: state.forecast };
+  return { forecast: state.weather.forecast };
 }
 
 export default connect(mapStateToProps)(Forecast);
