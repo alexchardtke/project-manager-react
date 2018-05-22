@@ -1,0 +1,35 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+.form-group, label {
+  margin-right: 10px;
+}
+
+h3 {
+  padding: 15px 0px;
+}
+
+.temperature {
+  font-size: 50px;
+  font-weight: lighter;
+}
+
+.weather {
+  font-size: 24px;
+  font-weight: lighter;
+}
+
+.search-container {
+  margin: 20px 0px;
+}
+#bootstrap-overrides .table th, #bootstrap-overrides .table td {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.form-inline .form-control {
+  height: 30px;
+}
