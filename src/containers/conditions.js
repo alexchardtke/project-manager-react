@@ -8,7 +8,7 @@ class Conditions extends Component {
     if (!this.props.conditions) {
       return null;
     }
-    const data = this.props.conditions.current_observation;
+    const data = this.props.conditions;
 
     console.log('Current Observation: ', data);
     const location = data.display_location.full;

@@ -10,8 +10,8 @@ class Search extends Component {
     super(props);
 
     this.state = {
-      searchCity: '',
-      searchState: '',
+      searchCity: 'Minneapolis',
+      searchState: 'MN',
     }
 
     this.onInputChange = this.onInputChange.bind(this);

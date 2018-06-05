@@ -10,7 +10,7 @@ class Forecast extends Component {
       return null;
     }
 
-    const data = this.props.forecast.forecast.simpleforecast.forecastday;
+    const data = this.props.forecast;
     console.log('Forecast: ', data);
 
     const forecastItems = data.map(day => {
