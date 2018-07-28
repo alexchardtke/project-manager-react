@@ -4,32 +4,56 @@ body {
   font-family: sans-serif;
 }
 
-.form-group, label {
-  margin-right: 10px;
+/* NAVBAR */
+#submit-button {
+  margin-left: 10px;
 }
 
+/* Current Conditions */
+
 h3 {
-  padding: 15px 0px;
+  margin: 15px 0px;
+  text-align: center;
+}
+
+.location {
+  margin: 15px 0px;
+  text-align: center;
+}
+
+.conditions-content {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+/* Temp and Weather */
+.tempAndWeather-container {
+  display: inline-block;
+}
+
+.weather-container {
+  display: inline-block;
 }
 
 .temperature {
+  display: inline-block;
   font-size: 50px;
   font-weight: lighter;
+  margin-right: 10px;
 }
 
 .weather {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: lighter;
 }
 
-.search-container {
-  margin: 20px 0px;
+/* Condition Details */
+.condition-details-container {
+  display: inline-block;
+  margin: auto 10px;
 }
+
 #bootstrap-overrides .table th, #bootstrap-overrides .table td {
   text-align: center;
   vertical-align: middle;
-}
-
-.form-inline .form-control {
-  height: 30px;
 }

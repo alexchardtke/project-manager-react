@@ -3,15 +3,18 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import PropTypes from 'prop-types';
 import { fetchConditions, fetchForecast } from '../actions/index';
+import { STATES_ABBREVIATIONS } from '../constants';
+import Cookies from 'universal-cookie';
 
 class Search extends Component {
 
   constructor(props) {
     super(props);
+    this.cookies = new Cookies();
 
     this.state = {
-      searchCity: 'Minneapolis',
-      searchState: 'MN',
+      searchCity: '',
+      searchState: ''
     }
 
     this.onInputChange = this.onInputChange.bind(this);
@@ -19,12 +22,51 @@ class Search extends Component {
     this.onFormSubmit = this.onFormSubmit.bind(this);
   }
 
+  componentWillMount() {
+    const searchCity = this.cookies.get('search_city');
+    const searchState = this.cookies.get('search_state');
+
+    if (searchCity && searchState) {
+      this.getWeatherFromCookies();
+    }
+  }
+
+  setCookies() {
+    const { searchCity, searchState } = this.state;
+    if (!searchCity || !searchState) return null;
+    this.cookies.set('search_city', searchCity, { path: '/' });
+    this.cookies.set('search_state', searchState, { path: '/' });
+    console.log('search_city', this.cookies.get('search_city'));
+    console.log('search_state', this.cookies.get('search_state'));
+    return this.cookies;
+  }
+
+  getCookies() {
+    let hasCityCookie = false;
+    let hasStateCookie = false;
+
+    if (this.cookies.get('search_city')) {
+      hasCityCookie = true;
+    }
+
+    if (this.cookies.get('search_state')) {
+      hasStateCookie = true;
+    }
+
+    if (hasCityCookie && hasStateCookie) {
+      console.log('has cookies')
+      return true;
+    }
+
+    return false;
+  }
+
   onInputChange(event) {
     this.setState({ searchCity: event.target.value });
   }
 
   onSelectChange(event) {
-    this.setState({ searchState: event.target.value })
+    this.setState({ searchState: event.target.value });
   }
 
   onFormSubmit(event) {
@@ -33,93 +75,55 @@ class Search extends Component {
     const { searchCity, searchState } = this.state;
 
     // Fetch weather
-    if (searchCity === '') {
-      return alert('Please enter a city.');
-    }
+    if (searchCity === '') return alert('Please enter a city.');
+    if (searchState === '') return alert('Please select a state.');
 
-    if (searchState === '') {
-      return alert('Please select a state.');
-    }
+    this.setCookies();
+
+    this.props.fetchConditions(searchCity, searchState);
+    this.props.fetchForecast(searchCity, searchState);
+
+    this.setState({ searchCity: '', searchState: '' });
+  }
+
+  getWeatherFromCookies() {
+    const searchCity = this.cookies.get('search_city');
+    const searchState = this.cookies.get('search_state');
+
+    console.log('Fetching weather from cookies...');
     this.props.fetchConditions(searchCity, searchState);
     this.props.fetchForecast(searchCity, searchState);
     this.setState({ searchCity: '', searchState: '' });
   }
 
+  getWeather() {
+    // check if search cookies are there
+    const { searchCity, searchState } = this.state;
+
+    console.log('Fetching weather from state...');
+    this.props.fetchConditions(searchCity, searchState);
+    this.props.fetchForecast(searchCity, searchState);
+
+    this.setState({ searchCity: '', searchState: '' });
+  }
+
   render() {
     return (
-      <div className="search-container container container-fluid">
-        <h3 className="forecast-header">Search</h3>
-        <form className="form-inline" onSubmit={this.onFormSubmit}>
-          <div className="form-group">
-            <label forhtml="search-input">City:</label>
-            <input
-              id="search-input"
-              className="form-control"
-              value={this.state.searchCity}
-              onChange={this.onInputChange}
-              type="text"
-              ref="searchCity"/>
-          </div>
-          <div className="form-group">
-            <label forhtml="state-select">State:</label>
+      <div className="search-container">
+        <nav className="navbar navbar-light bg-light">
+          <form className="form-inline" onSubmit={this.onFormSubmit}>
+            <input id="search-input" className="form-control mr-sm-2" ref="searchCity" onChange={this.onInputChange} value={this.state.searchCity} type="text" placeholder="City" aria-label="City Search" />
             <select id="state-select" className="form-control" ref="searchState" value={this.state.searchState} onChange={this.onSelectChange}>
-              <option value=""></option>
-              <option value="AL">Alabama</option>
-              <option value="AK">Alaska</option>
-              <option value="AZ">Arizona</option>
-              <option value="AR">Arkansas</option>
-              <option value="CA">California</option>
-              <option value="CO">Colorado</option>
-              <option value="CT">Connecticut</option>
-              <option value="DE">Deleware</option>
-              <option value="DC">District of Columbia</option>
-              <option value="FL">Florida</option>
-              <option value="GA">Georgia</option>
-              <option value="HI">Hawaii</option>
-              <option value="ID">Idaho</option>
-              <option value="IL">Illinois</option>
-              <option value="IN">Indiana</option>
-              <option value="IA">Iowa</option>
-              <option value="KS">Kansas</option>
-              <option value="KY">Kentucky</option>
-              <option value="LA">Louisiana</option>
-              <option value="ME">Maine</option>
-              <option value="MD">Maryland</option>
-              <option value="MA">Massachusetts</option>
-              <option value="MI">Michigan</option>
-              <option value="MN">Minnesota</option>
-              <option value="MS">Mississippi</option>
-              <option value="MO">Missouri</option>
-              <option value="MT">Montana</option>
-              <option value="NE">Nebraska</option>
-              <option value="NV">Nevada</option>
-              <option value="NH">New Hampshire</option>
-              <option value="NJ">New Jersey</option>
-              <option value="NM">New Mexico</option>
-              <option value="NY">New York</option>
-              <option value="NC">North Carolina</option>
-              <option value="ND">North Dakota</option>
-              <option value="OH">Ohio</option>
-              <option value="OK">Oklahoma</option>
-              <option value="OR">Oregon</option>
-              <option value="PA">Pennsylvania</option>
-              <option value="RI">Rhode Island</option>
-              <option value="SC">South Carolina</option>
-              <option value="SD">South Dakota</option>
-              <option value="TN">Tennessee</option>
-              <option value="TX">Texas</option>
-              <option value="UT">Utah</option>
-              <option value="VT">Vermont</option>
-              <option value="VA">Virginia</option>
-              <option value="WA">Washington</option>
-              <option value="WV">West Virginia</option>
-              <option value="WI">Wisconsin</option>
-              <option value="WY">Wyoming</option>
+              {STATES_ABBREVIATIONS.map((state, index) => {
+                if (state.value === '') {
+                  return <option key={index} className="disabled" value={state.value}>State</option>
+                }
+                return <option key={index} value={state.value}>{state.name}</option>
+              })}
             </select>
-          </div>
-          <button id="submit-button" type="submit" className="btn btn-secondary">Submit</button>
-        </form>
-        <hr />
+            <button id="submit-button" className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+          </form>
+        </nav>
       </div>
     );
   }

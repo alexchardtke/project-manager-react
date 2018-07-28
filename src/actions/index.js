@@ -15,7 +15,7 @@ export function fetchConditions(city, state) {
   city = city.replace(/ /g,"_");
   const url = `${ROOT_URL}/conditions/q/${state}/${city}.json`;
   const request = axios.get(url); // request is a promise
-	console.log('Conditions request: ', request);
+
   return {
     type: FETCH_CONDITIONS,
     payload: request
@@ -26,7 +26,7 @@ export function fetchForecast(city, state) {
   city = city.replace(/ /g,"_");
   const url = `${ROOT_URL}/forecast10day/q/${state}/${city}.json`;
   const request = axios.get(url);
-  console.log('Forecast request: ', request);
+
   return {
     type: FETCH_FORECAST,
     payload: request
